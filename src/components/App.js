@@ -16,7 +16,7 @@ export default class App extends Component {
   render() {
     let login = this.state.login;
     return (
-      <div class="App">
+      <div className="App">
         {login ? <Home toggle={this.toggleLogin} />
                : <Splash toggle={this.toggleLogin} />
         }

@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, Icon } from 'semantic-ui-react';
+import { Menu, Icon, Image, Container } from 'semantic-ui-react';
 import './App.css';
 
 export default class MenuBar extends Component {
 
   render() {
     return (
-      <div>
+      <Container text>
         <Menu fixed='top' inverted size="huge">
           <Menu.Item>
-            <Link to="/">Home</Link>
+            <Link to="/">
+              <Image avatar src="/egg.svg" /> Telur
+            </Link>
           </Menu.Item>
           <Menu.Item position="right">
-            <Link to="/profile"><Icon name="user circle outline"/></Link>
+            <Link to="/profile"><Icon name="user circle outline" /></Link>
           </Menu.Item>
-          <Menu.Item color="red"
-            onClick={this.props.toggle} 
-            name="Log Out" />
+          <Menu.Item>
+            <Link to="/" onClick={this.props.toggle}>Log Out</Link>
+          </Menu.Item>
         </Menu>
-      </div>
+      </Container>
     )
   }
 }

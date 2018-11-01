@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Label } from 'semantic-ui-react';
 
 export default class TabBar extends Component {
 
@@ -8,7 +8,9 @@ export default class TabBar extends Component {
     return (
       <Menu size="huge" fixed='bottom' inverted fluid widths={2}>
         <Menu.Item>
-          <Link to="/eggs">Hatch</Link>
+          <Link to="/eggs">
+            Hatch <Label color="red" content="0" circular />
+          </Link>
         </Menu.Item>
         <Menu.Item>
           <Link to="/lay">Lay</Link>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
+import Link from 'react-router-dom/Link';
 import './App.css';
 
 export default class Splash extends Component {
@@ -9,8 +10,12 @@ export default class Splash extends Component {
       <div>
         <h1>Telur</h1>
         <h3>Landing page here...</h3>
-        <Button primary onClick={this.props.toggle}>Sign Up</Button>
-        <Button secondary onClick={this.props.toggle}>Log In</Button>
+        <Link to="/">
+          <Button primary onClick={this.props.toggle}>Sign Up</Button>
+        </Link>
+        <Link to="/">
+          <Button secondary onClick={this.props.toggle}>Log In</Button>
+        </Link>
       </div>
     )
   }
