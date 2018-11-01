@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { Icon, Button } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 
 import MenuBar from './MenuBar';
 import TabBar from './TabBar';
