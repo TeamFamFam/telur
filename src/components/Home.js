@@ -6,6 +6,7 @@ import MenuBar from './MenuBar';
 import TabBar from './TabBar';
 import Help from './Help';
 import Farm from './Farm';
+import Lay from './Lay';
 
 import './App.css';
 
@@ -22,6 +23,7 @@ export default class Home extends Component {
         <Route exact path="/" component={Farm} />
         <Route exact path="/chickens" component={Chickens} />
         <Route exact path="/eggs" component={Eggs} />
+        <Route exact path="/lay" component={Lay} />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/help" component={Help} />
         <div style={{ "position": "fixed", "bottom": "5em", "right": "2em" }}>
@@ -35,6 +37,6 @@ export default class Home extends Component {
   };
 }
 
-const Eggs = () => (<div>Eggs I've Received</div>);
-const Profile = () => (<div>My Profile</div>);
-const Chickens = () => (<div>Chickens</div>);
+const Eggs = () => (<h1>Eggs I've Sent and Received</h1>);
+const Profile = () => (<h1>My Profile</h1>);
+const Chickens = () => (<h1>Chickens</h1>);

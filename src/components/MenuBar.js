@@ -11,7 +11,7 @@ export default class MenuBar extends Component {
         <Menu fixed='top' inverted size="huge">
           <Menu.Item>
             <Link to="/">
-              <Image avatar src="/egg.svg" /> Telur
+              <Image avatar src="egg.svg" /> Telur
             </Link>
           </Menu.Item>
           <Menu.Item position="right">

@@ -6,11 +6,14 @@ export default class TabBar extends Component {
 
   render() {
     return (
-      <Menu size="huge" fixed='bottom' inverted fluid widths={2}>
+      <Menu size="huge" fixed='bottom' fluid widths={3}>
         <Menu.Item>
           <Link to="/eggs">
-            Hatch <Label color="red" content="0" circular />
+            Eggs <Label color="red" content="0" circular />
           </Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to="/chickens">Chickens</Link>
         </Menu.Item>
         <Menu.Item>
           <Link to="/lay">Lay</Link>
