@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/telur/precache-manifest.78d8d84e21d59faaf4de45a977ea0d9f.js"
+  "/telur/precache-manifest.8009ae62b4ab48b1c3bf1932d2f94f16.js"
 );
 
 workbox.clientsClaim();
