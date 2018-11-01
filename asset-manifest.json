@@ -1,13 +1,13 @@
 {
-  "main.css": "/static/css/main.2b93dd0b.chunk.css",
-  "main.js": "/static/js/main.b689d070.chunk.js",
-  "main.js.map": "/static/js/main.b689d070.chunk.js.map",
-  "static/js/1.c00ef3e3.chunk.js": "/static/js/1.c00ef3e3.chunk.js",
-  "static/js/1.c00ef3e3.chunk.js.map": "/static/js/1.c00ef3e3.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
-  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/css/main.2b93dd0b.chunk.css.map": "/static/css/main.2b93dd0b.chunk.css.map",
-  "index.html": "/index.html",
-  "precache-manifest.5a2e4d7ad4e6785896019fc13de66db1.js": "/precache-manifest.5a2e4d7ad4e6785896019fc13de66db1.js",
-  "service-worker.js": "/service-worker.js"
+  "main.css": "/telur/static/css/main.2b93dd0b.chunk.css",
+  "main.js": "/telur/static/js/main.b689d070.chunk.js",
+  "main.js.map": "/telur/static/js/main.b689d070.chunk.js.map",
+  "static/js/1.c00ef3e3.chunk.js": "/telur/static/js/1.c00ef3e3.chunk.js",
+  "static/js/1.c00ef3e3.chunk.js.map": "/telur/static/js/1.c00ef3e3.chunk.js.map",
+  "runtime~main.js": "/telur/static/js/runtime~main.9fafbad5.js",
+  "runtime~main.js.map": "/telur/static/js/runtime~main.9fafbad5.js.map",
+  "static/css/main.2b93dd0b.chunk.css.map": "/telur/static/css/main.2b93dd0b.chunk.css.map",
+  "index.html": "/telur/index.html",
+  "precache-manifest.d82eed8f7bb09c6dec98ea34ca91bfe2.js": "/telur/precache-manifest.d82eed8f7bb09c6dec98ea34ca91bfe2.js",
+  "service-worker.js": "/telur/service-worker.js"
 }
