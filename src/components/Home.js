@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
-import { Button } from 'semantic-ui-react';
+import { Button, Container, Menu, Image, Icon } from 'semantic-ui-react';
 
-import MenuBar from './MenuBar';
 import TabBar from './TabBar';
 import Help from './Help';
 import Farm from './Farm';
@@ -19,13 +18,26 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-        <MenuBar toggle={this.props.toggle} />
+        <Container text>
+          <Menu fixed='top' inverted size="huge">
+            <Menu.Item>
+              <Link to="/">
+                <Image avatar src="egg.svg" /> Telur
+              </Link>
+            </Menu.Item>
+            <Menu.Item position="right">
+              <Link to="/profile"><Icon name="user circle outline" /></Link>
+            </Menu.Item>
+            <Menu.Item onClick={this.props.toggle}>Log Out
+            </Menu.Item>
+          </Menu>
+        </Container>
         <Route exact path="/" component={Farm} />
-        <Route exact path="/chickens" component={Chickens} />
-        <Route exact path="/eggs" component={Eggs} />
-        <Route exact path="/lay" component={Lay} />
-        <Route exact path="/profile" component={Profile} />
-        <Route exact path="/help" component={Help} />
+        <Route path="/chickens" component={Chickens} />
+        <Route path="/eggs" component={Eggs} />
+        <Route path="/lay" component={Lay} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/help" component={Help} />
         <div style={{ "position": "fixed", "bottom": "5em", "right": "2em" }}>
           <Link to="/help">
             <Button circular primary icon="question" size="huge" />

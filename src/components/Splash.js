@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
-import Link from 'react-router-dom/Link';
+import { Link, Redirect } from 'react-router-dom';
 import './App.css';
 
 export default class Splash extends Component {
@@ -16,6 +16,7 @@ export default class Splash extends Component {
         <Link to="/">
           <Button secondary onClick={this.props.toggle}>Log In</Button>
         </Link>
+        <Redirect to="/" />
       </div>
     )
   }

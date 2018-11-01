@@ -7,7 +7,7 @@ export default class Farm extends Component {
       <div>
         <h1>Lay an Egg</h1>
         <Container text>
-          <Segment vertical basic fluid>
+          <Segment vertical basic>
             <Segment attached="top">
               <Form>
                 <TextArea autoHeight placeholder="Write your message here..." rows={3} />
@@ -15,7 +15,7 @@ export default class Farm extends Component {
             </Segment>
             <Button.Group attached="bottom">
               <Button>Save Draft</Button>
-              <Button primary icon="right arrow" labelPosition="right" content="Send" />
+              <Button primary icon="right arrow" labelPosition="right" content="Next" />
             </Button.Group>
             <Image centered size="small" src="egg.svg" verticalAlign="bottom" />
           </Segment>
