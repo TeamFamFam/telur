@@ -12,7 +12,7 @@ import './App.css';
 export default class Home extends Component {
 
   state = {
-    alerts: 0
+    alerts: 5
   };
 
   render() {
@@ -27,7 +27,7 @@ export default class Home extends Component {
             <Menu.Item onClick={this.props.toggle} name="Log Out" />
           </Menu>
         </Container>
-        <Route exact path="/" component={Farm} />
+        <Route exact path="/" render={(props) => <Farm {...props} alerts={this.state.alerts} />} />
         <Route path="/chickens" component={Chickens} />
         <Route path="/eggs" component={Eggs} />
         <Route path="/lay" component={Lay} />
