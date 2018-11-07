@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
-import { Button, Container, Menu, Image, Icon } from 'semantic-ui-react';
+import { Button, Container, Menu, Image } from 'semantic-ui-react';
 
 import TabBar from './TabBar';
 import Help from './Help';
@@ -20,16 +20,11 @@ export default class Home extends Component {
       <div>
         <Container text>
           <Menu fixed='top' inverted size="huge">
-            <Menu.Item>
-              <Link to="/">
-                <Image avatar src="egg.svg" /> Telur
-              </Link>
+            <Menu.Item as={Link} to="/">
+              <Image avatar src="egg.svg" /> Telur
             </Menu.Item>
-            <Menu.Item position="right">
-              <Link to="/profile"><Icon name="user circle outline" /></Link>
-            </Menu.Item>
-            <Menu.Item onClick={this.props.toggle}>Log Out
-            </Menu.Item>
+            <Menu.Item position="right" as={Link} to="/profile" icon="user circle outline" />
+            <Menu.Item onClick={this.props.toggle} name="Log Out" />
           </Menu>
         </Container>
         <Route exact path="/" component={Farm} />
@@ -39,9 +34,7 @@ export default class Home extends Component {
         <Route path="/profile" component={Profile} />
         <Route path="/help" component={Help} />
         <div style={{ "position": "fixed", "bottom": "5em", "right": "2em" }}>
-          <Link to="/help">
-            <Button circular primary icon="question" size="huge" />
-          </Link>
+          <Button as={Link} to="/help" circular primary icon="question" size="huge" />
         </div>
         <TabBar alerts={this.state.alerts} />
       </div>
