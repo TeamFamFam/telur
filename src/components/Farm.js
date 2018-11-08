@@ -12,7 +12,7 @@ export default class Farm extends Component {
             Hi John Smith! <br />
             You have {this.props.alerts ? this.props.alerts : 0} eggs to hatch.
           </Segment>
-          <Image centered size="small" src="egg.svg" />
+          <Image centered size="small" src="/egg.svg" />
         </Container>
       </div>
     );
