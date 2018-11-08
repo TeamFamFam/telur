@@ -36,8 +36,15 @@ export default class Home extends Component {
         <Route path="/profile" component={Profile} />
         <Route path="/help" component={Help} />
         <Route path="/hatch" component={Hatch} />
+<<<<<<< HEAD
         <div className="Floating">
           <Button as={Link} to="/help" circular primary icon="question" size="huge" />
+=======
+        <div style={{ "position": "fixed", "bottom": "5em", "right": "2em" }}>
+          <Link to="/help">
+            <Button circular primary icon="question" size="huge" />
+          </Link>
+>>>>>>> 1efd39b230c2a40c12730d187182e808afd11373
         </div>
         <TabBar alerts={this.state.alerts} />
       </div>
