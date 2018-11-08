@@ -21,7 +21,7 @@ export default class Home extends Component {
         <Container text>
           <Menu fixed='top' inverted size="huge">
             <Menu.Item as={Link} to="/">
-              <Image avatar src="egg.svg" /> Telur
+              <Image avatar src="/egg.svg" /> Telur
             </Menu.Item>
             <Menu.Item position="right" as={Link} to="/profile" icon="user circle outline" />
             <Menu.Item onClick={this.props.toggle} name="Log Out" />
