@@ -17,23 +17,23 @@ export default class Home extends Component {
 
   render() {
     return (
-      <div>
-        <Container text>
-          <Menu fixed='top' inverted size="huge">
+      <div className="Home">
+        <Menu fixed='top' inverted size="huge">
+          <Container text>
             <Menu.Item as={Link} to="/">
               <Image avatar src="/egg.svg" /> Telur
             </Menu.Item>
             <Menu.Item position="right" as={Link} to="/profile" icon="user circle outline" />
             <Menu.Item onClick={this.props.toggle} name="Log Out" />
-          </Menu>
-        </Container>
+          </Container>
+        </Menu>
         <Route exact path="/" render={(props) => <Farm {...props} alerts={this.state.alerts} />} />
         <Route path="/chickens" component={Chickens} />
         <Route path="/eggs" component={Eggs} />
         <Route path="/lay" component={Lay} />
         <Route path="/profile" component={Profile} />
         <Route path="/help" component={Help} />
-        <div style={{ "position": "fixed", "bottom": "5em", "right": "2em" }}>
+        <div className="Floating">
           <Button as={Link} to="/help" circular primary icon="question" size="huge" />
         </div>
         <TabBar alerts={this.state.alerts} />
