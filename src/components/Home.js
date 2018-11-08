@@ -45,6 +45,5 @@ export default class Home extends Component {
   };
 }
 
-//const Eggs = () => (<h1>Eggs I've Sent and Received</h1>);
 const Profile = () => (<h1>My Profile</h1>);
 const Chickens = () => (<h1>Chickens</h1>);
