@@ -6,6 +6,8 @@ import TabBar from './TabBar';
 import Help from './Help';
 import Farm from './Farm';
 import Lay from './Lay';
+import Hatch from './Hatch'
+import Eggs from './Eggs'
 
 import './App.css';
 
@@ -33,6 +35,7 @@ export default class Home extends Component {
         <Route path="/lay" component={Lay} />
         <Route path="/profile" component={Profile} />
         <Route path="/help" component={Help} />
+        <Route path="/hatch" component={Hatch} />
         <div className="Floating">
           <Button as={Link} to="/help" circular primary icon="question" size="huge" />
         </div>
@@ -42,6 +45,6 @@ export default class Home extends Component {
   };
 }
 
-const Eggs = () => (<h1>Eggs I've Sent and Received</h1>);
+//const Eggs = () => (<h1>Eggs I've Sent and Received</h1>);
 const Profile = () => (<h1>My Profile</h1>);
 const Chickens = () => (<h1>Chickens</h1>);
