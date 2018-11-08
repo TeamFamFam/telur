@@ -1,4 +1,11 @@
 .App {
   padding-top: 5em;
+  padding-bottom: 5em;
   text-align: center;
+}
+
+.Floating { 
+  position: fixed;
+  bottom: 5em;
+  right: 2em;
 }
