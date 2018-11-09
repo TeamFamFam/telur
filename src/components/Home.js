@@ -8,6 +8,7 @@ import Farm from './Farm';
 import Lay from './Lay';
 import Hatch from './Hatch'
 import Eggs from './Eggs'
+import Chickens from './Chickens'
 
 import './App.css';
 
@@ -46,4 +47,3 @@ export default class Home extends Component {
 }
 
 const Profile = () => (<h1>My Profile</h1>);
-const Chickens = () => (<h1>Chickens</h1>);
