@@ -1,25 +1,41 @@
 import React, { Component } from 'react';
+
 import Home from './Home';
 import Splash from './Splash';
+import db from '../db';
 import './App.css';
 
 export default class App extends Component {
   state = {
-    "login": true
+    user: null
   };
 
-  toggleLogin = () => {
-    let login = !this.state.login;
-    this.setState({ login });
+  componentDidMount() {
+    db.createUser("Mom");
+    db.createUser("Bob");
+    let users = db.getUsers();
+    console.log("users:", users);
+    this.toggleLogin("Mom");
+  }
+
+  toggleLogin = (username) => {
+    if (this.state.user === null) {
+      let user = db.getUser(username);
+      this.setState({ user });
+    }
+    else this.setState({ user: null });
+  }
+
+  register = (username) => {
+    db.createUser(username);
   }
 
   render() {
-    let login = this.state.login;
     return (
       <div className="App">
-        {login
-          ? <Home toggle={this.toggleLogin} />
-          : <Splash toggle={this.toggleLogin} />
+        {this.state.user !== null
+          ? <Home toggle={this.toggleLogin} user={this.state.user} />
+          : <Splash login={this.toggleLogin} register={this.register} />
         }
       </div>
     )

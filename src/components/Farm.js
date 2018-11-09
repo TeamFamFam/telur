@@ -9,7 +9,7 @@ export default class Farm extends Component {
         <h1>My Farm</h1>
         <Container text>
           <Segment raised>
-            Hi John Smith! <br />
+            Hi {this.props.user.username}! <br />
             You have {this.props.alerts ? this.props.alerts : 0} eggs to hatch.
           </Segment>
           <Image centered size="small" src="/egg.svg" />

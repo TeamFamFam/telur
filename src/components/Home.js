@@ -29,10 +29,10 @@ export default class Home extends Component {
             <Menu.Item onClick={this.props.toggle} name="Log Out" />
           </Container>
         </Menu>
-        <Route exact path="/" render={(props) => <Farm {...props} alerts={this.state.alerts} />} />
+        <Route exact path="/" render={(props) => <Farm {...props} user={this.props.user} alerts={this.state.alerts} />} />
         <Route path="/chickens" component={Chickens} />
         <Route path="/eggs" component={Eggs} />
-        <Route path="/lay" component={Lay} />
+        <Route path="/lay" render={(props) => <Lay {...props} user={this.props.user} />} />
         <Route path="/profile" component={Profile} />
         <Route path="/help" component={Help} />
         <Route path="/hatch" component={Hatch} />
