@@ -11,6 +11,8 @@ import Eggs from './Eggs'
 import Chickens from './Chickens'
 import Profile from './Profile'
 
+import db from '../db';
+
 import './App.css';
 
 export default class Home extends Component {
@@ -18,6 +20,11 @@ export default class Home extends Component {
   state = {
     alerts: 5
   };
+
+  componentDidMount() {
+    let unread = db.getReceived(this.props.user.user_id).unread;
+    this.setState({ alerts: unread.length });
+  }
 
   render() {
     return (
@@ -33,7 +40,7 @@ export default class Home extends Component {
         </Menu>
         <Route exact path="/" render={(props) => <Farm {...props} user={this.props.user} alerts={this.state.alerts} />} />
         <Route path="/chickens" component={Chickens} />
-        <Route path="/eggs" component={Eggs} />
+        <Route path="/eggs" render={(props) => <Eggs {...props} user={this.props.user} />} />
         <Route path="/lay" render={(props) => <Lay {...props} user={this.props.user} />} />
         <Route path="/profile" component={Profile} />
         <Route path="/help" component={Help} />

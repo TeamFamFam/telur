@@ -23,6 +23,14 @@ export class Data {
     else return null;
   }
 
+  getUsername = (user_id) => {
+    let users = this.getUsers();
+    for(var u in users) {
+      if(users[u].user_id === user_id) return users[u].username;
+    }
+    return null;
+  }
+
   getUsers = () => {
     let users = window.localStorage.getItem("users");
     if (users === null) return ({});
@@ -55,7 +63,7 @@ export class Data {
   }
 
   setMessage = (message_id, message) => {
-    message = { ...message, read: [] };
+    message = { ...message, message_id, read: [] };
     window.localStorage.setItem(message_id, JSON.stringify(message));
 
     let midstring = window.localStorage.getItem("message_ids");

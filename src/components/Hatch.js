@@ -10,7 +10,7 @@ render() {
         <h1>Hatch an Egg</h1>
         <Container text>
           <Segment vertical basic>
-            <Image centered size="massive" src="cracked-egg.png" verticalAlign="bottom" />
+            <Image centered size="massive" src="/cracked-egg.png" verticalAlign="bottom" />
             <Button as={Link} to="/eggs/received" content="Back" />
           </Segment>
         </Container>

@@ -10,7 +10,7 @@ export default class Farm extends Component {
         <Container text>
           <Segment raised>
             Hi {this.props.user.username}! <br />
-            You have {this.props.alerts ? this.props.alerts : 0} eggs to hatch.
+            You have {this.props.alerts ? this.props.alerts : 0} egg{this.props.alerts !== 1 ? "s" : ""} to hatch.
           </Segment>
           <Image centered size="small" src="/egg.svg" />
         </Container>

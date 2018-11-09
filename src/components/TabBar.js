@@ -8,7 +8,7 @@ export default class TabBar extends Component {
     return (
       <Menu size="huge" fixed='bottom' fluid widths={3}>
         <Container text>
-          <Menu.Item as={Link} to="/eggs">
+          <Menu.Item as={Link} to="/eggs/sent">
             Eggs<Label color="red" content={this.props.alerts ? this.props.alerts : 0} circular />
           </Menu.Item>
           <Menu.Item as={Link} to="/chickens" name="Chickens" />
