@@ -23,6 +23,7 @@ export default class Hatch extends Component {
 
   componentDidMount() {
     let { message_id } = this.props.match.params;
+    console.log(message_id);
     let u = db.getMessage(message_id);
     let from = "From: " + db.getUsername(u.sender_id);
     let received = "Received: " + moment(u.timestamp).fromNow();

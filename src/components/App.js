@@ -13,14 +13,21 @@ export default class App extends Component {
   componentDidMount() {
     db.createUser("Mom");
     db.createUser("Bob");
+    let username = window.localStorage.getItem("login");
+    console.log(username);
+    if(username !== null) this.toggleLogin(username);
   }
 
   toggleLogin = (username) => {
     if (this.state.user === null) {
       let user = db.getUser(username);
+      window.localStorage.setItem("login", username);
       this.setState({ user });
     }
-    else this.setState({ user: null });
+    else {
+      this.setState({ user: null });
+      window.localStorage.removeItem("login");
+    }
   }
 
   register = (username) => {
