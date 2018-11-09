@@ -51,15 +51,13 @@ export class Data {
 
   getMessage = (message_id) => {
     let message = window.localStorage.getItem(message_id);
-    console.log(message);
     if (message) message = JSON.parse(message);
     return message;
   }
 
   writeMessage = (message_data) => {
-    let { text, timestamp, delay, sender_id, recipients_ids } = message_data;
-    let message_id = "" + sender_id + timestamp;
-    console.log(message_id, text);
+    //let { text, timestamp, delay, sender_id, recipients_ids } = message_data;
+    let message_id = "" + message_data.sender_id + message_data.timestamp;
     this.setMessage(message_id, message_data);
   }
 
@@ -124,9 +122,7 @@ export class Data {
 
   readMessage = (message_id, user_id) => {
     let message = this.getMessage(message_id);
-    console.log(message);
     if(!message.read.includes(user_id)) message.read = [...message.read, user_id];
-    console.log(message, message_id);
     window.localStorage.setItem(message_id, JSON.stringify(message));
   }
 

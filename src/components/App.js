@@ -13,9 +13,6 @@ export default class App extends Component {
   componentDidMount() {
     db.createUser("Mom");
     db.createUser("Bob");
-    let users = db.getUsers();
-    console.log("users:", users);
-    this.toggleLogin("Mom");
   }
 
   toggleLogin = (username) => {

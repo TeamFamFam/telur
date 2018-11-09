@@ -39,7 +39,7 @@ export default class Eggs extends Component {
             }
             sent = [...sent, tmp];
         }
-        for (var s in unreadMessages) {
+        for (s in unreadMessages) {
             let u = unreadMessages[s];
             let tmp = {
                 header: "Message From " + db.getUsername(u.sender_id),
@@ -50,8 +50,6 @@ export default class Eggs extends Component {
             unread = [...unread, tmp];
         }
         this.setState({ sent, unread });
-        console.log("sentMessages:", sentMessages);
-        console.log("unreadMessages:", unreadMessages);
     }
 
     render() {
@@ -70,14 +68,14 @@ export default class Eggs extends Component {
                 <Route path="/eggs/sent" render={(props) =>
                     <Segment attached>
                         {this.state.sent.length === 0 ? "There's nothing here..." :
-                        <Card.Group items={this.state.sent} />}
+                            <Card.Group items={this.state.sent} />}
                     </Segment>}
                 />
 
                 <Route path="/eggs/received" render={(props) =>
                     <Segment attached>
-                    {this.state.unread.length === 0 ? "There's nothing here..." :
-                        <Card.Group items={this.state.unread} />}
+                        {this.state.unread.length === 0 ? "There's nothing here..." :
+                            <Card.Group items={this.state.unread} />}
                     </Segment>}
                 />
 
