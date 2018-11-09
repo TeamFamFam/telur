@@ -30,7 +30,6 @@ render() {
                         <Table.Cell>
                             <Header as='h4' image>
                                 <Image src='/egg.svg' rounded size='large' />
-                                <Button as={Link} to="/hatch" content="Hatch" />
                             </Header>
                         </Table.Cell>
                         <Table.Cell>22</Table.Cell>

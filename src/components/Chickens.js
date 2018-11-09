@@ -9,7 +9,6 @@ render() {
         <div>
         <h1>Chickens</h1>
         <Image src='/med-chick.png' rounded size='large' />
-        <Image src='/small-chick.png' rounded size='large' />
 
       </div>
     )

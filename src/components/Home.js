@@ -9,6 +9,7 @@ import Lay from './Lay';
 import Hatch from './Hatch'
 import Eggs from './Eggs'
 import Chickens from './Chickens'
+import Profile from './Profile'
 
 import './App.css';
 
@@ -45,5 +46,3 @@ export default class Home extends Component {
     );
   };
 }
-
-const Profile = () => (<h1>My Profile</h1>);
