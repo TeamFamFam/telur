@@ -67,6 +67,7 @@ export default class Farm extends Component {
       recipients_ids: recipients
     }
     db.writeMessage(message);
+    this.swapSent();
   }
 
   render() {
@@ -113,7 +114,7 @@ export default class Farm extends Component {
                 <Button.Group attached="bottom" widths={3}>
                   <Button secondary icon="left arrow" labelPosition="left" content="Back" onClick={this.swapWrite} />
                   <Button>Save Draft</Button>
-                  <Button primary icon="right arrow" labelPosition="right" content="Send" onClick={this.sendMessage && this.swapSent} />
+                  <Button primary icon="right arrow" labelPosition="right" content="Send" onClick={this.sendMessage} />
                 </Button.Group>
               </div>
             }
