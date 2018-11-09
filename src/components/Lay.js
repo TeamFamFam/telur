@@ -51,6 +51,10 @@ export default class Farm extends Component {
     this.setState({ step: "Send" });
   }
 
+  swapSent = () => {
+    this.setState({ step: "Sent" });
+  }
+
   sendMessage = () => {
     let sender_id = this.props.user.user_id;
     let { text, recipients, delay } = this.state;
@@ -93,6 +97,7 @@ export default class Farm extends Component {
             {this.state.step === "Send" &&
               <div>
                 <Segment attached textAlign="left">
+                To:
                   <Dropdown
                     label="Send to"
                     placeholder="Choose recipient(s)..."
@@ -108,8 +113,15 @@ export default class Farm extends Component {
                 <Button.Group attached="bottom" widths={3}>
                   <Button secondary icon="left arrow" labelPosition="left" content="Back" onClick={this.swapWrite} />
                   <Button>Save Draft</Button>
-                  <Button primary icon="right arrow" labelPosition="right" content="Send" onClick={this.sendMessage} />
+                  <Button primary icon="right arrow" labelPosition="right" content="Send" onClick={this.sendMessage && this.swapSent} />
                 </Button.Group>
+              </div>
+            }
+            {this.state.step === "Sent" &&
+              <div>
+              <br/>
+              <h2> Your egg has been laid! </h2>
+              <h3> You can look back on your sent messages in the "Eggs" > "Eggs I've Sent" page. </h3>
               </div>
             }
             <Image centered size="small" src="/egg.svg" verticalAlign="bottom" />
