@@ -5,6 +5,8 @@ import {
   Segment,
   Container,
   TextArea,
+  Input,
+  Dropdown,
   Form,
   Button,
   Step
@@ -17,24 +19,30 @@ export default class Farm extends Component {
   state = {
     step: "Write",
     text: "",
-    friends: ({})
+    friends: [],
+    recipients: [],
+    delay: 0
   }
 
   componentDidMount() {
     let friendInfo = db.getFriends(this.props.user.user_id);
     let friends = [];
-    for(var friend in friendInfo) {
+    for (var friend in friendInfo) {
       var f = {
-        key: friendInfo[friend].username, 
-        value: friendInfo[friend].user_id, 
+        key: friendInfo[friend].username,
+        value: friendInfo[friend].user_id,
         text: friendInfo[friend].username
       };
       friends = [...friends, f];
     }
-    this.setState({friends});
+    this.setState({ friends });
+    console.log(db.getMessage("01541727656475"));
   }
 
   handleChange = (event) => this.setState({ text: event.target.value });
+
+  handleDelay = (event) => this.setState({ delay: event.target.value });
+  handleRecipients = (event, { value }) => { this.setState({ recipients: value }) };
 
   swapWrite = () => {
     this.setState({ step: "Write" });
@@ -46,14 +54,16 @@ export default class Farm extends Component {
 
   sendMessage = () => {
     let sender_id = this.props.user.user_id;
-    let text = this.state.text;
+    let { text, recipients, delay } = this.state;
     let timestamp = Date.now();
     let message = {
       text,
+      timestamp,
+      delay,
       sender_id,
-      timestamp
+      recipients_ids: recipients
     }
-    console.log(message);
+    db.writeMessage(message);
   }
 
   render() {
@@ -82,8 +92,18 @@ export default class Farm extends Component {
                 </Button.Group>
               </div>
               : <div>
-                <Segment attached as={Form}>
-                  <Form.Dropdown placeholder="Choose recipient(s)..." fluid multiple search selection options={this.state.friends} />
+                <Segment attached textAlign="left">
+                  <Dropdown
+                    label="Send to"
+                    placeholder="Choose recipient(s)..."
+                    fluid
+                    multiple
+                    search
+                    selection
+                    options={this.state.friends}
+                    value={this.state.recipients}
+                    onChange={this.handleRecipients} />
+                    <Input fluid label="Hours" labelPosition="right" placeholder="" value={this.state.delay} onChange={this.handleDelay} />
                 </Segment>
                 <Button.Group attached="bottom" widths={3}>
                   <Button secondary icon="left arrow" labelPosition="left" content="Back" onClick={this.swapWrite} />

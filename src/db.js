@@ -42,26 +42,30 @@ export class Data {
 
 
   getMessage = (message_id) => {
-    let message = JSON.parse(window.localStorage.getItem(message_id));
-    console.log(message);
+    let message = window.localStorage.getItem(message_id);
+    if(message !== null) message = JSON.parse(message);
     return message;
   }
 
-  writeMessage = ({ text, timestamp, delay, sender_id, recipients_ids }) => {
+  writeMessage = (message_data) => {
+    let { text, timestamp, delay, sender_id, recipients_ids } = message_data;
     let message_id = "" + sender_id + timestamp;
-    console.log(message_id);
-
+    console.log(message_id, text);
+    this.setMessage(message_id, message_data);
   }
 
   setMessage = (message_id, message) => {
     window.localStorage.setItem(message_id, JSON.stringify(message));
-    let message_ids = JSON.parse(window.localStorage.getItem("message_ids"));
-    message_ids = { ...message_ids, message_id };
+
+    let midstring = window.localStorage.getItem("message_ids");
+    let message_ids = [];
+    if(midstring !== null) message_ids = JSON.parse(midstring);
+    message_ids = [ ...message_ids, message_id ];
     window.localStorage.setItem("message_ids", JSON.stringify(message_ids));
+
   }
 
   getSent = (user_id) => {
-
   }
 
   getReceived = (user_id) => {

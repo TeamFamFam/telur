@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Input } from 'semantic-ui-react';
-import { Route, Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './App.css';
 
 export default class Splash extends Component {
