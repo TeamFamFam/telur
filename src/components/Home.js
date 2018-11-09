@@ -17,16 +17,8 @@ import './App.css';
 
 export default class Home extends Component {
 
-  state = {
-    alerts: 5
-  };
-
-  componentDidMount() {
-    let unread = db.getReceived(this.props.user.user_id).unread;
-    this.setState({ alerts: unread.length });
-  }
-
   render() {
+    let unread = db.getReceived(this.props.user.user_id).unread.length;
     return (
       <div className="Home">
         <Menu fixed='top' inverted size="huge">
@@ -38,7 +30,7 @@ export default class Home extends Component {
             <Menu.Item onClick={this.props.toggle} name="Log Out" />
           </Container>
         </Menu>
-        <Route exact path="/" render={(props) => <Farm {...props} user={this.props.user} alerts={this.state.alerts} />} />
+        <Route exact path="/" render={(props) => <Farm {...props} user={this.props.user} alerts={unread} />} />
         <Route path="/chickens" render={(props) => <Chickens {...props} user={this.props.user} />} />
         <Route path="/eggs" render={(props) => <Eggs {...props} user={this.props.user} />} />
         <Route path="/lay" render={(props) => <Lay {...props} user={this.props.user} />} />
@@ -48,7 +40,7 @@ export default class Home extends Component {
         <div className="Floating">
           <Button as={Link} to="/help" circular primary icon="question" size="huge" />
         </div>
-        <TabBar alerts={this.state.alerts} />
+        <TabBar alerts={unread} />
       </div>
     );
   };
