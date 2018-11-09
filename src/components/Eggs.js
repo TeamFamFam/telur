@@ -69,13 +69,15 @@ export default class Eggs extends Component {
 
                 <Route path="/eggs/sent" render={(props) =>
                     <Segment attached>
-                        <Card.Group items={this.state.sent} />
+                        {this.state.sent.length === 0 ? "There's nothing here..." :
+                        <Card.Group items={this.state.sent} />}
                     </Segment>}
                 />
 
                 <Route path="/eggs/received" render={(props) =>
                     <Segment attached>
-                        <Card.Group items={this.state.unread} />
+                    {this.state.unread.length === 0 ? "There's nothing here..." :
+                        <Card.Group items={this.state.unread} />}
                     </Segment>}
                 />
 

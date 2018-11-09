@@ -51,7 +51,8 @@ export class Data {
 
   getMessage = (message_id) => {
     let message = window.localStorage.getItem(message_id);
-    if (message !== null) message = JSON.parse(message);
+    console.log(message);
+    if (message) message = JSON.parse(message);
     return message;
   }
 
@@ -123,7 +124,10 @@ export class Data {
 
   readMessage = (message_id, user_id) => {
     let message = this.getMessage(message_id);
+    console.log(message);
     if(!message.read.includes(user_id)) message.read = [...message.read, user_id];
+    console.log(message, message_id);
+    window.localStorage.setItem(message_id, JSON.stringify(message));
   }
 
 }
