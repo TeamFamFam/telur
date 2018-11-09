@@ -44,7 +44,7 @@ export default class Eggs extends Component {
             let tmp = {
                 header: "Message From " + db.getUsername(u.sender_id),
                 meta: "Received: " + moment(u.timestamp).fromNow(),
-                extra: "Can open " + moment(u.timestamp + u.delay*3600000).fromNow(),
+                extra: "Can open " + moment(u.timestamp).add(u.delay, 'h').fromNow(),
                 href: "/hatch/" + u.message_id
             }
             unread = [...unread, tmp];

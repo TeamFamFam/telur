@@ -44,7 +44,7 @@ export default class Home extends Component {
         <Route path="/lay" render={(props) => <Lay {...props} user={this.props.user} />} />
         <Route path="/profile" component={Profile} />
         <Route path="/help" component={Help} />
-        <Route path="/hatch" render={(props) => <Hatch {...props} user={this.props.user} />} />
+        <Route path="/hatch/:message_id" render={(props) => <Hatch {...props} user={this.props.user} />} />
         <div className="Floating">
           <Button as={Link} to="/help" circular primary icon="question" size="huge" />
         </div>
