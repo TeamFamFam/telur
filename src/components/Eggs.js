@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
-import { Image, Segment, Container, Button, Header, Table, Menu, Label, Card } from 'semantic-ui-react';
+import { Segment, Container, Menu, Label, Card } from 'semantic-ui-react';
+import * as moment from 'moment';
 
 import db from '../db';
 
@@ -17,24 +18,34 @@ export default class Eggs extends Component {
         let sent = [];
         let unread = [];
         for (var s in sentMessages) {
+            let m = sentMessages[s];
             let tmp = {
-                description: sentMessages[s].text,
-                extra: "Sent:" + new Date(sentMessages[s].timestamp).toLocaleString()
+                description: m.text,
+                extra: "Sent: " + moment(m.timestamp).fromNow()
             }
-            if (sentMessages[s].read.length > 0) {
+            let recipients = "Sent to: ";
+            for (var i = 0; i < m.recipients_ids.length; i++) {
+                recipients += db.getUsername(m.recipients_ids[i]);
+                if (i + 1 < m.recipients_ids.length) recipients += ", ";
+            }
+            tmp = { ...tmp, meta: recipients };
+
+            if (m.read.length > 0) {
                 let readby = "Read by: ";
-                for (var id in sentMessages[s].read) {
-                    readby += db.getUsername(sentMessages.read[id]);
+                for (var id in m.read) {
+                    readby += db.getUsername(m.read[id]);
                 }
-                tmp = {...tmp, meta: readby};
+                tmp = { ...tmp, meta: readby };
             }
             sent = [...sent, tmp];
         }
         for (var s in unreadMessages) {
+            let u = unreadMessages[s];
             let tmp = {
-                header: "Message From " + db.getUsername(unreadMessages[s].sender_id),
-                extra: "Sent:" + new Date(unreadMessages[s].timestamp).toLocaleString(),
-                href: "/hatch/" + unreadMessages[s].message_id
+                header: "Message From " + db.getUsername(u.sender_id),
+                meta: "Received: " + moment(u.timestamp).fromNow(),
+                extra: "Can open " + moment(u.timestamp + u.delay*3600000).fromNow(),
+                href: "/hatch/" + u.message_id
             }
             unread = [...unread, tmp];
         }
@@ -50,7 +61,9 @@ export default class Eggs extends Component {
                 <Menu size="huge" fluid widths={2} attached>
                     <Container text>
                         <Menu.Item as={Link} to="/eggs/sent" name="Sent" />
-                        <Menu.Item as={Link} to="/eggs/received" name="Received" />
+                        <Menu.Item as={Link} to="/eggs/received" name="Received">
+                            Received <Label color="red" content={this.state.unread.length} circular />
+                        </Menu.Item>
                     </Container>
                 </Menu>
 
