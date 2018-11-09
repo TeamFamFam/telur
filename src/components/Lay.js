@@ -36,7 +36,6 @@ export default class Farm extends Component {
       friends = [...friends, f];
     }
     this.setState({ friends });
-    console.log(db.getMessage("01541727656475"));
   }
 
   handleChange = (event) => this.setState({ text: event.target.value });
@@ -76,8 +75,8 @@ export default class Farm extends Component {
               <Step title="Write" icon="edit" active={this.state.step === "Write"} onClick={this.swapWrite} />
               <Step title="Send" icon="send" active={this.state.step === "Send"} onClick={this.swapSend} />
             </Step.Group>
-            {this.state.step === "Write"
-              ? <div>
+            {this.state.step === "Write" &&
+              <div>
                 <Segment attached as={Form}>
                   <TextArea
                     autoHeight
@@ -90,8 +89,9 @@ export default class Farm extends Component {
                   <Button>Save Draft</Button>
                   <Button secondary icon="right arrow" labelPosition="right" content="Next" onClick={this.swapSend} />
                 </Button.Group>
-              </div>
-              : <div>
+              </div>}
+            {this.state.step === "Send" &&
+              <div>
                 <Segment attached textAlign="left">
                   <Dropdown
                     label="Send to"
@@ -103,7 +103,7 @@ export default class Farm extends Component {
                     options={this.state.friends}
                     value={this.state.recipients}
                     onChange={this.handleRecipients} />
-                    <Input fluid label="Hours" labelPosition="right" placeholder="" value={this.state.delay} onChange={this.handleDelay} />
+                  Delay: <Input fluid label="Hours" labelPosition="right" placeholder="" value={this.state.delay} onChange={this.handleDelay} />
                 </Segment>
                 <Button.Group attached="bottom" widths={3}>
                   <Button secondary icon="left arrow" labelPosition="left" content="Back" onClick={this.swapWrite} />
