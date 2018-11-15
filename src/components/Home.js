@@ -21,13 +21,13 @@ export default class Home extends Component {
     let unread = db.getReceived(this.props.user.user_id).unread.length;
     return (
       <div className="Home">
-        <Menu fixed='top' inverted >
+        <Menu fixed='top' inverted color="teal">
           <Container text>
             <Menu.Item header as={Link} to="/">
               <Image avatar src="/egg.svg" /> Telur
             </Menu.Item>
             <Menu.Menu position="right">
-              <Menu.Item as={Link} to="/help" icon="question" />
+              <Menu.Item as={Link} to="/help" icon="question" content="Help" />
               <Dropdown item pointing="top right" icon="user circle outline">
                 <Dropdown.Menu>
                   <Dropdown.Item as={Link} to="/profile" text="My Profile" />

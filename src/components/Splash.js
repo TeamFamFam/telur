@@ -27,7 +27,7 @@ export default class Splash extends Component {
   render() {
     return (
       <Grid stackable verticalAlign="middle" style={{ height: "100%" }}>
-        <Grid.Row divided color="black" centered style={{ padding: "2em 2em" }}>
+        <Grid.Row color="teal" centered style={{ padding: "2em 2em" }}>
           <Grid.Column />
           <Grid.Column width="5">
             <Header inverted textAlign="center" style={{ fontSize: '2em' }}>
@@ -37,7 +37,6 @@ export default class Splash extends Component {
           <Grid.Column width="5">
             <Container textAlign="center">
               <Segment stacked>
-                <Header as="h3" textAlign="left">Sign in</Header>
                 <Form onSubmit={this.login} size="large">
                   <Form.Input
                     icon='user'
@@ -56,17 +55,17 @@ export default class Splash extends Component {
                     value={this.state.password}
                     onChange={this.handleChange}
                   />
-                  <Form.Button secondary fluid content="Log In" size="large" />
+                  <Form.Button primary fluid content="Log In" size="large" />
                 </Form>
               </Segment>
               <Button
                 fluid
                 as={Link}
                 to="/"
-                primary
+                secondary
                 size="large"
                 onClick={this.register}
-                content="New user? Sign Up"
+                content="Sign Up"
                 icon="right arrow"
                 labelPosition="right"
               />
