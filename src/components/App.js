@@ -15,7 +15,7 @@ export default class App extends Component {
     db.createUser("Bob");
     let username = window.localStorage.getItem("login");
     console.log(username);
-    if(username !== null) this.toggleLogin(username);
+    if (username !== null) this.toggleLogin(username);
   }
 
   toggleLogin = (username) => {
