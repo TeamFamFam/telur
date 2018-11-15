@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Container } from 'semantic-ui-react';
 
 import Home from './Home';
 import Splash from './Splash';
@@ -36,12 +37,12 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <Container text className="App">
         {this.state.user !== null
           ? <Home toggle={this.toggleLogin} user={this.state.user} />
           : <Splash login={this.toggleLogin} register={this.register} />
         }
-      </div>
+      </Container>
     )
   }
 }

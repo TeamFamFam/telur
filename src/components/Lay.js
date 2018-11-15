@@ -72,63 +72,58 @@ export default class Farm extends Component {
 
   render() {
     return (
-      <div>
-        <Container text>
-          <Segment vertical basic>
-            <Header>Lay an Egg</Header>
-            <Step.Group unstackable attached="top" size="mini">
-              <Step title="Write" icon="edit" active={this.state.step === "Write"} onClick={this.swapWrite} />
-              <Step title="Send" icon="send" active={this.state.step === "Send"} onClick={this.swapSend} />
-            </Step.Group>
-            {this.state.step === "Write" &&
-              <div>
-                <Segment attached as={Form}>
-                  <TextArea
-                    autoHeight
-                    placeholder="Write your message here..."
-                    rows={3}
-                    value={this.state.text}
-                    onChange={this.handleChange} />
-                </Segment>
-                <Button.Group attached="bottom">
-                  <Button>Save Draft</Button>
-                  <Button secondary icon="right arrow" labelPosition="right" content="Next" onClick={this.swapSend} />
-                </Button.Group>
-              </div>}
-            {this.state.step === "Send" &&
-              <div>
-                <Segment attached textAlign="left">
-                To:
-                  <Dropdown
-                    label="Send to"
-                    placeholder="Choose recipient(s)..."
-                    fluid
-                    multiple
-                    search
-                    selection
-                    options={this.state.friends}
-                    value={this.state.recipients}
-                    onChange={this.handleRecipients} />
-                  Delay: <Input fluid label="Hours" labelPosition="right" placeholder="" value={this.state.delay} onChange={this.handleDelay} />
-                </Segment>
-                <Button.Group attached="bottom" widths={3}>
-                  <Button secondary icon="left arrow" labelPosition="left" content="Back" onClick={this.swapWrite} />
-                  <Button>Save Draft</Button>
-                  <Button primary icon="right arrow" labelPosition="right" content="Send" onClick={this.sendMessage} />
-                </Button.Group>
-              </div>
-            }
-            {this.state.step === "Sent" &&
-              <div>
-              <br/>
-              <h2> Your egg has been laid! </h2>
-              <h3> You can look back on your sent messages in the "Eggs" > "Eggs I've Sent" page. </h3>
-              </div>
-            }
-            <Image centered size="small" src="/egg.svg" verticalAlign="bottom" />
-          </Segment>
-        </Container>
-      </div>
+      <Container textAlign="center">
+        <Header>Lay an Egg</Header>
+        <Step.Group unstackable attached="top" size="mini">
+          <Step title="Write" icon="edit" active={this.state.step === "Write"} onClick={this.swapWrite} />
+          <Step title="Send" icon="send" active={this.state.step === "Send"} onClick={this.swapSend} />
+        </Step.Group>
+        {this.state.step === "Write" &&
+          <div>
+            <Segment attached as={Form}>
+              <TextArea
+                autoHeight
+                placeholder="Write your message here..."
+                rows={3}
+                value={this.state.text}
+                onChange={this.handleChange} />
+            </Segment>
+            <Button.Group attached="bottom" widths={2} size="tiny">
+              <Button>Save Draft</Button>
+              <Button secondary icon="right arrow" labelPosition="right" content="Next" onClick={this.swapSend} />
+            </Button.Group>
+          </div>}
+        {this.state.step === "Send" &&
+          <div>
+            <Segment attached textAlign="left">
+              To: <Dropdown
+                label="Send to"
+                placeholder="Choose recipient(s)..."
+                fluid
+                multiple
+                search
+                selection
+                options={this.state.friends}
+                value={this.state.recipients}
+                onChange={this.handleRecipients} />
+              Delay: <Input fluid label="Hours" labelPosition="right" placeholder="" value={this.state.delay} onChange={this.handleDelay} />
+            </Segment>
+            <Button.Group attached="bottom" widths={3} size="tiny">
+              <Button secondary icon="left arrow" labelPosition="left" content="Back" onClick={this.swapWrite} />
+              <Button>Save Draft</Button>
+              <Button primary icon="right arrow" labelPosition="right" content="Send" onClick={this.sendMessage} />
+            </Button.Group>
+          </div>
+        }
+        {this.state.step === "Sent" &&
+          <div>
+            <br />
+            <h2> Your egg has been laid! </h2>
+            <h3> You can look back on your sent messages in the "Eggs" > "Laid" page. </h3>
+          </div>
+        }
+        <Image centered size="small" src="/egg.svg" verticalAlign="bottom" />
+      </Container>
     );
   }
 }

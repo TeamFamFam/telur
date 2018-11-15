@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
-import { Button, Container, Menu, Image } from 'semantic-ui-react';
+import { Container, Menu, Image, Dropdown } from 'semantic-ui-react';
 
 import TabBar from './TabBar';
 import Help from './Help';
@@ -21,13 +21,21 @@ export default class Home extends Component {
     let unread = db.getReceived(this.props.user.user_id).unread.length;
     return (
       <div className="Home">
-        <Menu fixed='top' inverted size="huge">
+        <Menu fixed='top' inverted >
           <Container text>
-            <Menu.Item as={Link} to="/">
+            <Menu.Item header as={Link} to="/">
               <Image avatar src="/egg.svg" /> Telur
             </Menu.Item>
-            <Menu.Item position="right" as={Link} to="/profile" icon="user circle outline" />
-            <Menu.Item onClick={this.props.toggle} name="Log Out" />
+            <Menu.Menu position="right">
+              <Menu.Item as={Link} to="/help" icon="question" />
+              <Dropdown item pointing="top right" icon="user circle outline">
+                <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to="/profile" text="My Profile" />
+                  <Dropdown.Divider />
+                  <Dropdown.Item onClick={this.props.toggle} text="Log Out" />
+                </Dropdown.Menu>
+              </Dropdown>
+            </Menu.Menu>
           </Container>
         </Menu>
         <Route exact path="/" render={(props) => <Farm {...props} user={this.props.user} alerts={unread} />} />
@@ -37,9 +45,6 @@ export default class Home extends Component {
         <Route path="/profile" component={Profile} />
         <Route path="/help" component={Help} />
         <Route path="/hatch/:message_id" render={(props) => <Hatch {...props} user={this.props.user} />} />
-        <div className="Floating">
-          <Button as={Link} to="/help" circular primary icon="question" size="huge" />
-        </div>
         <TabBar alerts={unread} />
       </div>
     );
