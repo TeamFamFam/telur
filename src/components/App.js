@@ -37,12 +37,14 @@ export default class App extends Component {
 
   render() {
     return (
-      <Container text className="App">
+      <div>
         {this.state.user !== null
-          ? <Home toggle={this.toggleLogin} user={this.state.user} />
+          ? <Container text className="App">
+              <Home toggle={this.toggleLogin} user={this.state.user} />
+            </Container>
           : <Splash login={this.toggleLogin} register={this.register} />
         }
-      </Container>
+      </div>
     )
   }
 }
