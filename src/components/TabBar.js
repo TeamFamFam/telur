@@ -6,7 +6,7 @@ export default class TabBar extends Component {
 
   render() {
     return (
-      <Menu fixed='bottom' fluid widths={3} inverted color="olive">
+      <Menu fixed='bottom' fluid widths={3} inverted color="green">
         <Container text>
           <Menu.Item as={Link} to="/eggs/sent">
             Eggs {this.props.alerts !== 0 && <Label color="red" content={this.props.alerts} circular />}
