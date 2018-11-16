@@ -17,6 +17,11 @@ import './App.css';
 
 class Home extends Component {
 
+  logout = () => {
+    this.props.history.push("/");
+    this.props.toggle();
+  }
+
   render() {
     let unread = db.getReceived(this.props.user.user_id).unread.length;
     console.log("history", this.props.history);
@@ -35,7 +40,7 @@ class Home extends Component {
                 <Dropdown.Menu>
                   <Dropdown.Item as={Link} to="/profile" text="My Profile" />
                   <Dropdown.Divider />
-                  <Dropdown.Item onClick={this.props.toggle} text="Log Out" />
+                  <Dropdown.Item onClick={this.logout} text="Log Out" />
                 </Dropdown.Menu>
               </Dropdown>
             </Menu.Menu>
