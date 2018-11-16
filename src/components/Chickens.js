@@ -11,17 +11,22 @@ export default class Chickens extends Component {
     read: []
   }
 
+  hatchLinker = (e, data) => {
+    this.props.history.push("/hatch/" + data.id);
+  }
+
   componentDidMount() {
     let readMessages = db.getReceived(this.props.user.user_id).read;
     let read = [];
     for (var s in readMessages) {
       let m = readMessages[s];
       let tmp = {
-        header: "Message From " + db.getUsername(m.sender_id),
+        header: "From " + db.getUsername(m.sender_id),
         description: m.text,
         meta: "Received: " + moment(m.timestamp).fromNow(),
         link: true,
-        href: "/hatch/" + m.message_id
+        onClick: this.hatchLinker,
+        id: m.message_id
       }
       read = [...read, tmp];
     }

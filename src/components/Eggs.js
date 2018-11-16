@@ -40,7 +40,7 @@ export default class Eggs extends Component {
       tmp = { ...tmp, header: recipients };
 
       if (m.read.length > 0) {
-        let readby = "Read by: ";
+        let readby = "Hatched by: ";
         for (var id in m.read) {
           readby += db.getUsername(m.read[id]);
         }
@@ -51,9 +51,9 @@ export default class Eggs extends Component {
     for (s in unreadMessages) {
       let u = unreadMessages[s];
       let tmp = {
-        header: "Message From " + db.getUsername(u.sender_id),
+        header: "From " + db.getUsername(u.sender_id),
         meta: "Received: " + moment(u.timestamp).fromNow(),
-        extra: "Can open " + moment(u.timestamp).add(u.delay, 'h').fromNow(),
+        extra: "Hatchable " + moment(u.timestamp).add(u.delay, 'h').fromNow(),
         link: true,
         onClick: this.hatchLinker,
         id: u.message_id
@@ -78,7 +78,7 @@ export default class Eggs extends Component {
         <Route path="/eggs/sent" render={(props) =>
           <Segment>
             {this.state.sent.length === 0
-              ? "No sent messages"
+              ? "No sent eggs"
               : <Card.Group textAlign="left" centered items={this.state.sent} />}
           </Segment>}
         />
@@ -86,7 +86,7 @@ export default class Eggs extends Component {
         <Route path="/eggs/received" render={(props) =>
           <Segment>
             {this.state.unread.length === 0
-              ? "No new messages"
+              ? "No unhatched eggs"
               : <Card.Group textAlign="left" centered items={this.state.unread} />}
           </Segment>}
         />

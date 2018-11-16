@@ -27,7 +27,7 @@ export default class Hatch extends Component {
     let u = db.getMessage(message_id);
     let from = "From: " + db.getUsername(u.sender_id);
     let received = "Received: " + moment(u.timestamp).fromNow();
-    let open = "Can open " + moment(u.timestamp).add(u.delay, 'h').fromNow();
+    let open = "Hatchable " + moment(u.timestamp).add(u.delay, 'h').fromNow();
     let openable = moment(u.timestamp).add(u.delay, 'h').isBefore(moment());
     let hatched = u.read.includes(this.props.user.user_id);
     this.setState({ message_id, message: u, from, received, open, openable, hatched, text: u.text });
