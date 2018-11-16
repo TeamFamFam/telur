@@ -29,7 +29,7 @@ export default class Eggs extends Component {
       let m = sentMessages[s];
       let tmp = {
         description: m.text,
-        onClick: this.clickHandler,
+        //onClick: this.clickHandler,
         meta: "Sent: " + moment(m.timestamp).fromNow()
       }
       let recipients = "Sent to: ";
