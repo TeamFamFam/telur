@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, withRouter } from 'react-router-dom';
 import { Container, Menu, Image, Dropdown } from 'semantic-ui-react';
 
 import TabBar from './TabBar';
@@ -15,14 +15,17 @@ import db from '../db';
 
 import './App.css';
 
-export default class Home extends Component {
+class Home extends Component {
 
   render() {
     let unread = db.getReceived(this.props.user.user_id).unread.length;
+    console.log("history", this.props.history);
     return (
       <div className="Home">
         <Menu fixed='top' inverted color="teal">
           <Container text>
+            {this.props.history && 
+              <Menu.Item icon="left arrow" onClick={this.props.history.goBack} />}
             <Menu.Item header as={Link} to="/">
               <Image avatar src="/egg.svg" /> Telur
             </Menu.Item>
@@ -50,3 +53,5 @@ export default class Home extends Component {
     );
   };
 }
+
+export default withRouter(Home);

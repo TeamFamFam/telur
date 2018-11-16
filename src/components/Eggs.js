@@ -12,6 +12,14 @@ export default class Eggs extends Component {
     unread: []
   }
 
+  clickHandler = (event, data) => {
+    console.log("data:", data);
+  }
+
+  hatchLinker = (e, data) => {
+    this.props.history.push("/hatch/" + data.id);
+  }
+
   componentDidMount() {
     let sentMessages = db.getSent(this.props.user.user_id);
     let unreadMessages = db.getReceived(this.props.user.user_id).unread;
@@ -21,6 +29,7 @@ export default class Eggs extends Component {
       let m = sentMessages[s];
       let tmp = {
         description: m.text,
+        onClick: this.clickHandler,
         meta: "Sent: " + moment(m.timestamp).fromNow()
       }
       let recipients = "Sent to: ";
@@ -46,7 +55,8 @@ export default class Eggs extends Component {
         meta: "Received: " + moment(u.timestamp).fromNow(),
         extra: "Can open " + moment(u.timestamp).add(u.delay, 'h').fromNow(),
         link: true,
-        href: "/hatch/" + u.message_id
+        onClick: this.hatchLinker,
+        id: u.message_id
       }
       unread = [...unread, tmp];
     }
