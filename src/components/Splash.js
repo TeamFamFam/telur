@@ -30,8 +30,10 @@ export default class Splash extends Component {
         <Grid.Row color="teal" centered style={{ padding: "2em 2em" }}>
           <Grid.Column />
           <Grid.Column width="5">
-            <Header inverted textAlign="center" style={{ fontSize: '2em' }}>
-              <Image src="/egg.svg" size="large" />Telur
+            <Header inverted textAlign="center" style={{ fontSize: '4em' }}>
+              <Image src="/egg.svg" size="large" />
+              Telur
+              <Header.Subheader>Break news to your family</Header.Subheader>
             </Header>
           </Grid.Column>
           <Grid.Column width="5">
@@ -73,24 +75,19 @@ export default class Splash extends Component {
           </Grid.Column>
           <Grid.Column />
         </Grid.Row>
-        <Grid.Row verticalAlign="middle" style={{ padding: "2em" }}>
-          <Grid.Column />
-          <Container text textAlign="left" style={{ fontSize: '1.2em' }}>
-            <Header as="h2">About Us</Header>
-            <p>
-              Telur is an application that aims to enhance bonding between family members or close friends.
-            </p>
-            <p>
-              Ever found it really hard to talk to your family about something? <br />
-              Telur lets you send scheduled messages in the form of eggs so you can talk about
-              these issues in your own time, on a less intense platform.
-            </p>
-            <p>
-              In order to read messages, users must hatch the eggs they receive. <br />
-              These hatched eggs turn into chickens, and like this, families can raise farms together!
-            </p>
-          </Container>
-          <Grid.Column />
+        <Grid.Row verticalAlign="middle" centered style={{ padding: "2em" }}>
+          <Grid.Column width="6">
+            <Container fluid textAlign="left" style={{ fontSize: '1.2em' }}>
+              <Header as="h2">What's Telur?</Header>
+              <p>
+                Ever found it really hard to talk to your family about something?
+              </p>
+              <p>
+                Telur lets you send scheduled messages in the form of eggs so you can talk about
+                these issues in your own time, on a less intense platform.
+              </p>
+            </Container>
+          </Grid.Column>
         </Grid.Row>
       </Grid>
 
