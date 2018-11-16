@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Image, Segment, Container, Button } from 'semantic-ui-react';
+import { Image, Header, Container, Button, Card } from 'semantic-ui-react';
 import * as moment from 'moment';
 
 import db from '../db';
@@ -27,7 +27,7 @@ export default class Hatch extends Component {
     let u = db.getMessage(message_id);
     let from = "From: " + db.getUsername(u.sender_id);
     let received = "Received: " + moment(u.timestamp).fromNow();
-    let open = "Can open " + moment(u.timestamp).add(u.delay, 'h').fromNow();
+    let open = "Hatchable " + moment(u.timestamp).add(u.delay, 'h').fromNow();
     let openable = moment(u.timestamp).add(u.delay, 'h').isBefore(moment());
     let hatched = u.read.includes(this.props.user.user_id);
     this.setState({ message_id, message: u, from, received, open, openable, hatched, text: u.text });
@@ -35,25 +35,35 @@ export default class Hatch extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Hatch an Egg</h1>
-        <Container text>
-          <Segment vertical basic>
-            {this.state.from}<br />
-            {this.state.received}<br />
-            {}<br />
-            {this.state.hatched ? this.state.text
-              : this.state.openable ? <Button onClick={this.handleHatch} content="Hatch!" /> : this.state.open}<br />
-            <Image centered size="massive" src={
-              this.state.openable
-                ? this.state.hatched ? "/chick-egg.png" : "/cracked-egg.png"
-                : "/egg.png"
+      <Container textAlign="center">
+        <Header>Hatch</Header>
+        <Card centered>
+          <Image src=
+            {this.state.openable
+              ? this.state.hatched 
+                ? "/chick-egg.png" 
+                : "/cracked-egg.png"
+              : "/egg.png"
             }
-            />
-            <Button as={Link} to="/eggs/received" content="Back" />
-          </Segment>
-        </Container>
-      </div>
+          />
+          <Card.Content>
+            <Card.Header>{this.state.from}</Card.Header>
+            <Card.Meta>{this.state.received}</Card.Meta>
+            {this.state.hatched && <Card.Description>{this.state.text}</Card.Description>}
+          </Card.Content>
+          {!this.state.hatched &&
+            <Card.Content extra>
+              {this.state.openable
+                ? <Button fluid primary onClick={this.handleHatch} content="Hatch!" />
+                : this.state.open}
+            </Card.Content>
+          }
+          <Button.Group widths={2}>
+            <Button as={Link} to="/eggs/received" content="Received Eggs" attached />
+            <Button as={Link} to="/chickens" content="My Chickens" attached />
+          </Button.Group>
+        </Card>
+      </Container>
     )
   }
 

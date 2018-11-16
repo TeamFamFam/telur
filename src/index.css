@@ -1,1 +1,7 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css');
+
+body, 
+body > div,
+body > div > div {
+  height: 100%;
+}

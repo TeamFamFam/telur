@@ -1,7 +1,10 @@
 .App {
   padding-top: 5em;
   padding-bottom: 5em;
-  text-align: center;
+}
+
+.centered {
+  margin: 0 auto !important;
 }
 
 .Floating { 

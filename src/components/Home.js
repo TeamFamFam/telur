@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
-import { Button, Container, Menu, Image } from 'semantic-ui-react';
+import { Route, Link, withRouter } from 'react-router-dom';
+import { Container, Menu, Image, Dropdown } from 'semantic-ui-react';
 
 import TabBar from './TabBar';
 import Help from './Help';
@@ -15,19 +15,30 @@ import db from '../db';
 
 import './App.css';
 
-export default class Home extends Component {
+class Home extends Component {
 
   render() {
     let unread = db.getReceived(this.props.user.user_id).unread.length;
+    console.log("history", this.props.history);
     return (
       <div className="Home">
-        <Menu fixed='top' inverted size="huge">
+        <Menu fixed='top' inverted color="teal">
           <Container text>
-            <Menu.Item as={Link} to="/">
+            {this.props.history && 
+              <Menu.Item icon="left arrow" onClick={this.props.history.goBack} />}
+            <Menu.Item header as={Link} to="/">
               <Image avatar src="/egg.svg" /> Telur
             </Menu.Item>
-            <Menu.Item position="right" as={Link} to="/profile" icon="user circle outline" />
-            <Menu.Item onClick={this.props.toggle} name="Log Out" />
+            <Menu.Menu position="right">
+              <Menu.Item as={Link} to="/help" icon="question" content="Help" />
+              <Dropdown item pointing="top right" icon="user circle outline">
+                <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to="/profile" text="My Profile" />
+                  <Dropdown.Divider />
+                  <Dropdown.Item onClick={this.props.toggle} text="Log Out" />
+                </Dropdown.Menu>
+              </Dropdown>
+            </Menu.Menu>
           </Container>
         </Menu>
         <Route exact path="/" render={(props) => <Farm {...props} user={this.props.user} alerts={unread} />} />
@@ -37,11 +48,10 @@ export default class Home extends Component {
         <Route path="/profile" component={Profile} />
         <Route path="/help" component={Help} />
         <Route path="/hatch/:message_id" render={(props) => <Hatch {...props} user={this.props.user} />} />
-        <div className="Floating">
-          <Button as={Link} to="/help" circular primary icon="question" size="huge" />
-        </div>
         <TabBar alerts={unread} />
       </div>
     );
   };
 }
+
+export default withRouter(Home);
