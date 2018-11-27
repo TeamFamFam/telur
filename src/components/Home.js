@@ -5,7 +5,7 @@ import { Container, Menu, Image, Dropdown } from 'semantic-ui-react';
 import TabBar from './TabBar';
 import Help from './Help';
 import Farm from './Farm';
-import Lay from './Lay';
+import {Lay, Lay2} from './Lay';
 import Hatch from './Hatch'
 import Eggs from './Eggs'
 import Chickens from './Chickens'
@@ -50,6 +50,7 @@ class Home extends Component {
         <Route path="/chickens" render={(props) => <Chickens {...props} user={this.props.user} />} />
         <Route path="/eggs" render={(props) => <Eggs {...props} user={this.props.user} />} />
         <Route path="/lay" render={(props) => <Lay {...props} user={this.props.user} />} />
+        <Route path="/lay2" render={(props) => <Lay2 {...props} user={this.props.user} />} />
         <Route path="/profile" component={Profile} />
         <Route path="/help" component={Help} />
         <Route path="/hatch/:message_id" render={(props) => <Hatch {...props} user={this.props.user} />} />

@@ -14,7 +14,7 @@ import {
 
 import db from '../db.js';
 
-export default class Farm extends Component {
+export class Lay extends Component {
 
   state = {
     step: "Write",
@@ -122,6 +122,79 @@ export default class Farm extends Component {
             <h3> You can look back on your sent messages in the "Eggs" > "Laid" page. </h3>
           </div>
         }
+        <Image centered size="small" src="/egg.svg" verticalAlign="bottom" />
+      </Container>
+    );
+  }
+}
+
+export class Lay2 extends Component {
+
+  state = {
+    text: "",
+    friends: [],
+    recipients: [],
+    delay: 0
+  }
+
+  componentDidMount() {
+    let friendInfo = db.getFriends(this.props.user.user_id);
+    let friends = [];
+    for (var friend in friendInfo) {
+      var f = {
+        key: friendInfo[friend].username,
+        value: friendInfo[friend].user_id,
+        text: friendInfo[friend].username
+      };
+      friends = [...friends, f];
+    }
+    this.setState({ friends });
+  }
+
+  handleChange = (event) => this.setState({ text: event.target.value });
+
+  handleDelay = (event) => this.setState({ delay: event.target.value });
+  handleRecipients = (event, { value }) => { this.setState({ recipients: value }) };
+
+  sendMessage = () => {
+    let sender_id = this.props.user.user_id;
+    let { text, recipients, delay } = this.state;
+    let timestamp = Date.now();
+    let message = {
+      text,
+      timestamp,
+      delay,
+      sender_id,
+      recipients_ids: recipients
+    }
+    db.writeMessage(message);
+    this.swapSent();
+  }
+
+  render() {
+    return (
+      <Container textAlign="center">
+        <Header>Lay an Egg</Header>
+        <Container textAlign="left">
+          To: <Dropdown
+            label="Send to"
+            placeholder="Choose recipient(s)..."
+            fluid
+            multiple
+            search
+            selection
+            options={this.state.friends}
+            value={this.state.recipients}
+            onChange={this.handleRecipients} />
+          Delay: <Input fluid label="Hours" labelPosition="right" placeholder="" value={this.state.delay} onChange={this.handleDelay} />
+          <TextArea
+            autoHeight
+            placeholder="Write your message here..."
+            rows={3}
+            value={this.state.text}
+            onChange={this.handleChange} />
+            <Button fluid primary icon="right arrow" labelPosition="right" content="Send" onClick={this.sendMessage} />
+        </Container>
         <Image centered size="small" src="/egg.svg" verticalAlign="bottom" />
       </Container>
     );
