@@ -9,8 +9,13 @@ import {
   Dropdown,
   Form,
   Button,
-  Step
+  Step,
+  Accordion,
+  Icon,
+  Message,
+  Modal
 } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 import db from '../db.js';
 
@@ -134,7 +139,15 @@ export class Lay2 extends Component {
     text: "",
     friends: [],
     recipients: [],
-    delay: 0
+    delay: {
+      days: 0,
+      hours: 0,
+      minutes: 0
+    },
+    toggle: false,
+    texterr: false,
+    recerr: false,
+    confirm: false
   }
 
   componentDidMount() {
@@ -152,13 +165,33 @@ export class Lay2 extends Component {
   }
 
   handleChange = (event) => this.setState({ text: event.target.value });
-
-  handleDelay = (event) => this.setState({ delay: event.target.value });
+  handleDelay = (event) => {
+    let { delay } = this.state;
+    delay[event.target.id] = Math.abs(parseInt("0" + event.target.value));
+    this.setState({ delay });
+  };
+  handleToggle = () => {
+    let { toggle } = this.state;
+    toggle = !toggle;
+    this.setState({ toggle })
+  }
   handleRecipients = (event, { value }) => { this.setState({ recipients: value }) };
+  unconfirm = () => this.setState({ confirm: false });
 
+  validate = () => {
+    let { text, recipients, texterr, recerr } = this.state;
+    texterr = text.length === 0;
+    recerr = recipients.length === 0;
+    if (texterr || recerr) {
+      this.setState({ texterr, recerr });
+    } else {
+      this.setState({ confirm: true });
+    }
+  }
   sendMessage = () => {
     let sender_id = this.props.user.user_id;
-    let { text, recipients, delay } = this.state;
+    let { text, recipients } = this.state;
+    let delay = this.state.delay.days * 24 + this.state.delay.hours + this.state.delay.minutes / 60;
     let timestamp = Date.now();
     let message = {
       text,
@@ -168,33 +201,76 @@ export class Lay2 extends Component {
       recipients_ids: recipients
     }
     db.writeMessage(message);
-    this.swapSent();
+    this.setState({ confirm: false, sent: true });
   }
 
   render() {
     return (
       <Container textAlign="center">
         <Header>Lay an Egg</Header>
-        <Container textAlign="left">
-          To: <Dropdown
-            label="Send to"
-            placeholder="Choose recipient(s)..."
-            fluid
-            multiple
-            search
-            selection
-            options={this.state.friends}
-            value={this.state.recipients}
-            onChange={this.handleRecipients} />
-          Delay: <Input fluid label="Hours" labelPosition="right" placeholder="" value={this.state.delay} onChange={this.handleDelay} />
-          <TextArea
-            autoHeight
-            placeholder="Write your message here..."
-            rows={3}
-            value={this.state.text}
-            onChange={this.handleChange} />
-            <Button fluid primary icon="right arrow" labelPosition="right" content="Send" onClick={this.sendMessage} />
-        </Container>
+        {!this.state.sent &&
+          <div>
+            <Modal basic open={this.state.confirm}>
+              <Header content="Confirm" />
+              <Modal.Content>
+                <p>
+                  Are you sure you're done laying your egg?
+                </p>
+              </Modal.Content>
+              <Modal.Actions>
+                <Button color='red' inverted onClick={this.unconfirm}>
+                  <Icon name='remove' /> No
+                </Button>
+                <Button color='green' inverted onClick={this.sendMessage}>
+                  <Icon name='checkmark' /> Yes, Send
+                </Button>
+              </Modal.Actions>
+            </Modal>
+            <Segment attached textAlign="left">
+              To: <Dropdown
+                error={this.state.recerr}
+                label="To:"
+                placeholder="Choose recipient(s)..."
+                fluid
+                multiple
+                search
+                selection
+                options={this.state.friends}
+                value={this.state.recipients}
+                onChange={this.handleRecipients} />
+            </Segment>
+            <Segment attached textAlign="left">
+              <Accordion>
+                <Accordion.Title active={this.state.toggle} onClick={this.handleToggle}>
+                  <Icon name="dropdown" /> Delay: {!this.state.toggle && this.state.delay.days + "D " + this.state.delay.hours + "H " + this.state.delay.minutes + "M"}
+                </Accordion.Title>
+                <Accordion.Content active={this.state.toggle}>
+                  <Input size="small" fluid labelPosition="right" label="Days" id="days" value={this.state.delay.days} onChange={this.handleDelay} />
+                  <Input size="small" fluid labelPosition="right" label="Hours" id="hours" value={this.state.delay.hours} onChange={this.handleDelay} />
+                  <Input size="small" fluid labelPosition="right" label="Minutes" id="minutes" value={this.state.delay.minutes} onChange={this.handleDelay} />
+                </Accordion.Content>
+              </Accordion>
+            </Segment>
+            <Segment attached as={Form} error={this.state.texterr}>
+              <Message error>Can't send empty message!</Message>
+              <TextArea
+                autoHeight
+                placeholder="Write your message here..."
+                rows={3}
+                value={this.state.text}
+                onChange={this.handleChange} />
+            </Segment>
+            <Segment attached>
+              <Button fluid primary icon="right arrow" labelPosition="right" content="Send" onClick={this.validate} />
+            </Segment>
+          </div>
+        }
+        {this.state.sent &&
+          <div>
+            <h2> Your egg has been laid! </h2>
+            <Button as={Link} to="/eggs/sent" content="View My Sent Eggs" />
+          </div>
+        }
         <Image centered size="small" src="/egg.svg" verticalAlign="bottom" />
       </Container>
     );
