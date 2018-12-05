@@ -49,8 +49,8 @@ class Home extends Component {
         <Route exact path="/" render={(props) => <Farm {...props} user={this.props.user} alerts={unread} />} />
         <Route path="/chickens" render={(props) => <Chickens {...props} user={this.props.user} />} />
         <Route path="/eggs" render={(props) => <Eggs {...props} user={this.props.user} />} />
-        <Route path="/lay" render={(props) => <Lay {...props} user={this.props.user} />} />
-        <Route path="/lay2" render={(props) => <Lay2 {...props} user={this.props.user} />} />
+        <Route path="/lay2" render={(props) => <Lay {...props} user={this.props.user} />} />
+        <Route path="/lay" render={(props) => <Lay2 {...props} user={this.props.user} />} />
         <Route path="/profile" component={Profile} />
         <Route path="/help" component={Help} />
         <Route path="/hatch/:message_id" render={(props) => <Hatch {...props} user={this.props.user} />} />
